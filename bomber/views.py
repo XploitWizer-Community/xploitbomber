@@ -27,13 +27,13 @@ def doattack(request):
         frequency_no = "1000"
 
     #FOR WINDOWS
-    os.system(f"python bomber.py --num {frequency_no} {mobile_no}")
+    # os.system(f"python bomber.py --num {frequency_no} {mobile_no}")
 
     #FOR LINUX SERVER(AWS)
     # os.system(f"nohup /home/ubuntu/env/bin/python3 bomber.py --num {frequency_no} {mobile_no}  &")
 
     #FOR HEROKU
-    # os.system(f"nohup /usr/bin/python3 bomber.py --num {int(frequency_no)*2} --country {country_code} {mobile_no} &")
+    os.system(f"nohup /usr/bin/python3 bomber.py --num {int(frequency_no)*2} --country {country_code} {mobile_no} &")
 
     messages.success(request, f"ATTACK STARTED AT {mobile_no}  WITH {frequency_no} SMS ")
     return redirect("/")
