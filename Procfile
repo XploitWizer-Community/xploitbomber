@@ -1,0 +1,1 @@
+web: gunicorn Xploitbomber.wsgi:application --log-file -

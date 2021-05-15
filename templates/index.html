@@ -1,0 +1,301 @@
+
+
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+
+{% load static %}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta property="og:site_name" content="Xploitbomber" />
+  <meta name="twitter:title" content="Xploitbomber : Smb Bomber Webapp" />
+  <meta name="twitter:description" content="Xploitbomber : Smb Bomber Webapp" />
+  <meta name="twitter:image:src" content="https://xploitphis.tk/static/main_temp/icons/xwlogo2.jpeg" />
+  <meta name="twitter:site" content="@XPLOITBOMBER" />
+
+
+  <link rel="icon"href="https://xploitphis.tk/static/main_temp/icons/xwlogo2.jpeg">
+  <meta property="og:title" content="XPLOITBOMBER" />
+  <meta property="og:description" content="Xploitbomber : Smb Bomber Webapp" />
+  <meta property="og:url" content="https://xploitweb.tk" />
+  <meta property="og:image" content="https://xploitphis.tk/static/main_temp/icons/xwlogo2.jpeg" />
+
+
+  <title>XPLOITBOMBER</title>
+
+
+<style>
+
+*, ::after, ::before {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: black;
+  color: #fff;
+  font-family: monospace, serif;
+  letter-spacing: 0.05em;
+}
+
+h1 {
+  font-size: 23px;
+}
+
+.form {
+  width: 300px;
+  /*padding: 64px 15px 24px;*/
+  margin: 0 auto;
+}
+.form .control {
+  margin: 0 0 24px;
+}
+.form .control input {
+  width: 100%;
+  padding: 14px 16px;
+  border: 0;
+  background: transparent;
+  color: #fff;
+  font-family: monospace, serif;
+  letter-spacing: 0.05em;
+  font-size: 16px;
+}
+.form .control input:hover, .form .control input:focus {
+  outline: none;
+  border: 0;
+}
+.form .btn {
+  width: 100%;
+  display: block;
+  padding: 14px 16px;
+  background: transparent;
+  outline: none;
+  border: 0;
+  color: #fff;
+  letter-spacing: 0.1em;
+  font-weight: bold;
+  font-family: monospace;
+  font-size: 16px;
+}
+
+.block-cube {
+  position: relative;
+}
+.block-cube .bg-top {
+  position: absolute;
+  height: 10px;
+  background: #020024;
+  background: linear-gradient(90deg, #020024 0%, #340979 37%, #00d4ff 94%);
+  bottom: 100%;
+  left: 5px;
+  right: -5px;
+  transform: skew(-45deg, 0);
+  margin: 0;
+}
+.block-cube .bg-top .bg-inner {
+  bottom: 0;
+}
+.block-cube .bg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: #020024;
+  background: linear-gradient(90deg, #020024 0%, #340979 37%, #00d4ff 94%);
+}
+.block-cube .bg-right {
+  position: absolute;
+  background: #020024;
+  background: #00d4ff;
+  top: -5px;
+  z-index: 0;
+  bottom: 5px;
+  width: 10px;
+  left: 100%;
+  transform: skew(0, -45deg);
+}
+.block-cube .bg-right .bg-inner {
+  left: 0;
+}
+.block-cube .bg .bg-inner {
+  transition: all 0.2s ease-in-out;
+}
+.block-cube .bg-inner {
+  background: #212121;
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  right: 2px;
+  bottom: 2px;
+}
+.block-cube .text {
+  position: relative;
+  z-index: 2;
+}
+.block-cube.block-input input {
+  position: relative;
+  z-index: 2;
+}
+.block-cube.block-input input:focus ~ .bg-right .bg-inner, .block-cube.block-input input:focus ~ .bg-top .bg-inner, .block-cube.block-input input:focus ~ .bg-inner .bg-inner {
+  top: 100%;
+  background: rgba(255, 255, 255, 0.5);
+}
+.block-cube.block-input .bg-top,
+.block-cube.block-input .bg-right,
+.block-cube.block-input .bg {
+  background: rgba(255, 255, 255, 0.5);
+  transition: background 0.2s ease-in-out;
+}
+.block-cube.block-input .bg-right .bg-inner,
+.block-cube.block-input .bg-top .bg-inner {
+  transition: all 0.2s ease-in-out;
+}
+.block-cube.block-input:focus .bg-top,
+.block-cube.block-input:focus .bg-right,
+.block-cube.block-input:focus .bg, .block-cube.block-input:hover .bg-top,
+.block-cube.block-input:hover .bg-right,
+.block-cube.block-input:hover .bg {
+  background: rgba(255, 255, 255, 0.8);
+}
+.block-cube.block-cube-hover:focus .bg .bg-inner, .block-cube.block-cube-hover:hover .bg .bg-inner {
+  top: 100%;
+}
+
+.credits {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  padding: 15px 15px;
+  width: 100%;
+  z-index: 111;
+}
+.credits a {
+  opacity: 0.6;
+  color: #fff;
+  font-size: 11px;
+  text-decoration: none;
+}
+.credits a:hover {
+  opacity: 1;
+}
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+
+
+  <script>
+  if (document.location.search.match(/type=embed/gi)) {
+    window.parent.postMessage("resize", "*");
+  }
+</script>
+
+
+</head>
+
+<body translate="no" >
+
+<center>
+  {% if messages %}
+            {% for msg in messages %}
+            <div class="alert alert-{{msg.tags}} alert-dismissible fade show" style="margin-top: 30px" role="alert">
+                {{ msg }}
+            </div>
+            {% endfor %}
+  {% endif %}
+  </center>
+
+
+
+  <center><img src="https://xploitphis.tk/static/main_temp/icons/xwlogo2.jpeg" width="170" height="140" style="margin-top:50px"></center>
+  <center>
+  <h1 style="font-size: 30px">
+      XPLOITBOMBER
+    </h1>
+    </center>
+  <form action="/doattack/" method="post" autocomplete='off' class='form'>
+    {% csrf_token %}
+  <div class='control'>
+    <center>
+      <h1>
+<!--      Sign In-->
+    </h1>
+    </center>
+
+  </div>
+  <div class='control block-cube block-input'>
+    <input name='cc' placeholder='Country Code :' type='text'>
+    <div class='bg-top'>
+      <div class='bg-inner'></div>
+    </div>
+    <div class='bg-right'>
+      <div class='bg-inner'></div>
+    </div>
+    <div class='bg'>
+      <div class='bg-inner'></div>
+    </div>
+  </div>
+
+
+
+      <div class='control block-cube block-input'>
+    <input name='mn' placeholder='Mobile No :' type='text'>
+    <div class='bg-top'>
+      <div class='bg-inner'></div>
+    </div>
+    <div class='bg-right'>
+      <div class='bg-inner'></div>
+    </div>
+    <div class='bg'>
+      <div class='bg-inner'></div>
+    </div>
+  </div>
+
+
+
+
+
+  <div class='control block-cube block-input'>
+    <input name='fq' placeholder='No Of Sms :' type='text'>
+    <div class='bg-top'>
+      <div class='bg-inner'></div>
+    </div>
+    <div class='bg-right'>
+      <div class='bg-inner'></div>
+    </div>
+    <div class='bg'>
+      <div class='bg-inner'></div>
+    </div>
+  </div>
+  <button class='btn block-cube block-cube-hover' type='button'>
+    <div class='bg-top'>
+      <div class='bg-inner'></div>
+    </div>
+    <div class='bg-right'>
+      <div class='bg-inner'></div>
+    </div>
+    <div class='bg'>
+      <div class='bg-inner'></div>
+    </div>
+    <div class='text'>
+      <input type="submit" class="btn btn-outline-success px-4" value="Start Bombing">
+    </div>
+  </button>
+<!--  <center><h1 style="font-size: 25px"><a href="/signup" style="color:white">Signup</a></h1></center>-->
+  <div class='credits'>
+  <!-- <center><p style="font-size: 13px">Made By Divyansh Malik</p></center -->
+  </div>
+</form>
+
+
+
+
+
+</body>
+
+</html>
+
