@@ -33,7 +33,10 @@ def doattack(request):
     # os.system(f"nohup /home/ubuntu/env/bin/python3 bomber.py --num {frequency_no} {mobile_no}  &")
 
     #FOR HEROKU
-    os.system(f"nohup /usr/bin/python3 bomber.py --num {int(frequency_no)*2} --country {country_code} {mobile_no} &")
+    os.system(f"nohup python bomber.py --num {int(frequency_no)*2} --country {country_code} {mobile_no} &")
+    # os.system(f"nohup /usr/bin/python3 bomber.py --num 10 --country 91 7466067516 &")
+    # os.system(f"nohup python bomber.py --num 10 --country 91 7466067516 &")
+
 
     messages.success(request, f"ATTACK STARTED AT {mobile_no}  WITH {frequency_no} SMS ")
     return redirect("/")
